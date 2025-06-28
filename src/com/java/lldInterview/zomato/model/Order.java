@@ -1,4 +1,4 @@
-package com.java.lldInterview.model;
+package com.java.lldInterview.zomato.model;
 
 import java.util.List;
 

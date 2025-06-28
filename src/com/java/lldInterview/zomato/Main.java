@@ -1,8 +1,8 @@
-package com.java.lldInterview;
+package com.java.lldInterview.zomato;
 
-import com.java.lldInterview.model.*;
-import com.java.lldInterview.service.DeliveryAssignedService;
-import com.java.lldInterview.service.TrackingSystem;
+import com.java.lldInterview.zomato.model.*;
+import com.java.lldInterview.zomato.service.DeliveryAssignedService;
+import com.java.lldInterview.zomato.service.TrackingSystem;
 
 import java.util.Arrays;
 import java.util.List;

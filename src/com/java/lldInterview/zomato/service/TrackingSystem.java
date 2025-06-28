@@ -1,6 +1,6 @@
-package com.java.lldInterview.service;
+package com.java.lldInterview.zomato.service;
 
-import com.java.lldInterview.model.Location;
+import com.java.lldInterview.zomato.model.Location;
 
 public class TrackingSystem {
     public double estimateETA(Location source,

@@ -19,10 +19,6 @@ public class SemaphoreFeature {
             rateLimiter.release();
             System.out.println("Release the permit of " + threadName);
         }
-
-        try (rateLimiter.tryAcquire(1, TimeUnit.SECONDS)) {
-            
-        }
     }
 
     public static void main(String[] args) {
