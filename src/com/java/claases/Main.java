@@ -52,6 +52,9 @@ public class Main {
 
         Predicate<Integer> predicate = (x) -> x % 2 == 0;
         System.out.println(predicate.test(3));
+
+        A ob = new B();
+
     }
 
 
