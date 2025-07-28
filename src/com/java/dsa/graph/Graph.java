@@ -35,6 +35,45 @@ public class Graph {
         }
     }
 
+    private boolean isCycle(Map<Integer, List<Integer>> adj, boolean[] vis, boolean[] cycleVis, int parent) {
+        vis[parent] = cycleVis[parent] = true;
+        for (int child : adj.getOrDefault(parent, new ArrayList<>())) {
+            if (vis[child] && cycleVis[child]) {
+                return true;
+            } else if (!vis[child]) {
+                if (isCycle(adj, vis, cycleVis, child)) return true;
+            }
+        }
+        cycleVis[parent] = false;
+        return false;
+    }
+
+    public boolean isCyclic(int V, int[][] edges) {
+        // code here
+
+        Map<Integer, List<Integer>> adj = new HashMap<>(V);
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            adj.putIfAbsent(u, new ArrayList<>());
+            adj.get(u).add(v);
+        }
+
+        for (int i = 0; i < V; i++) {
+            adj.putIfAbsent(i, new ArrayList<>());
+        }
+
+        boolean[] vis = new boolean[V + 1];
+        boolean[] cycleVis = new boolean[V + 1];
+
+        for (int i = 0; i < V; i++) {
+            if (!vis[i]) {
+                if (isCycle(adj, vis, cycleVis, i)) return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int V = scanner.nextInt();
