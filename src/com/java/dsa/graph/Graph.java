@@ -35,16 +35,40 @@ public class Graph {
         }
     }
 
-    private boolean isCycle(Map<Integer, List<Integer>> adj, boolean[] vis, boolean[] cycleVis, int parent) {
+    private boolean isCycleDfs(Map<Integer, List<Integer>> adj, boolean[] vis, boolean[] cycleVis, int parent) {
         vis[parent] = cycleVis[parent] = true;
         for (int child : adj.getOrDefault(parent, new ArrayList<>())) {
             if (vis[child] && cycleVis[child]) {
                 return true;
             } else if (!vis[child]) {
-                if (isCycle(adj, vis, cycleVis, child)) return true;
+                if (isCycleDfs(adj, vis, cycleVis, child)) return true;
             }
         }
         cycleVis[parent] = false;
+        return false;
+    }
+
+    private boolean isCycleBfs(Map<Integer, List<Integer>> adj, int V) {
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] vis = new boolean[V];
+        for (int i = 0; i < V; ++i) {
+            boolean[] cycleVis = new boolean[V];
+            if (!vis[i]) {
+                cycleVis[i] = vis[i] = true;
+                queue.add(i);
+                while (!queue.isEmpty()) {
+                    int parent = queue.poll();
+                    for (int child : adj.getOrDefault(parent, new ArrayList<>())) {
+                        if (!vis[child]) {
+                            cycleVis[i] = vis[child] = true;
+                            queue.add(child);
+                        } else if (cycleVis[child]) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
         return false;
     }
 
@@ -63,16 +87,22 @@ public class Graph {
             adj.putIfAbsent(i, new ArrayList<>());
         }
 
-        boolean[] vis = new boolean[V + 1];
-        boolean[] cycleVis = new boolean[V + 1];
+//        cycle detect using dfs
+//        boolean[] vis = new boolean[V + 1];
+//        boolean[] cycleVis = new boolean[V + 1];
+//
+//        for (int i = 0; i < V; i++) {
+//            if (!vis[i]) {
+//                if (isCycleDfs(adj, vis, cycleVis, i)) return true;
+//            }
+//        }
+//        return false;
 
-        for (int i = 0; i < V; i++) {
-            if (!vis[i]) {
-                if (isCycle(adj, vis, cycleVis, i)) return true;
-            }
-        }
-        return false;
+
+//        cycle detect using bfs
+        return isCycleBfs(adj, V);
     }
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

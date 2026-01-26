@@ -19,7 +19,6 @@ public class RaceCondition {
         };
 
 
-
         Thread t1 = new Thread(task);
         Thread t2 = new Thread(task);
 
