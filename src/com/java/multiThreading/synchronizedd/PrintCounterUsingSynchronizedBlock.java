@@ -11,7 +11,7 @@ public class PrintCounterUsingSynchronizedBlock extends Thread {
         System.out.println(Thread.currentThread().getName());
         System.out.println(Thread.currentThread().getName());
         System.out.println(Thread.currentThread().getName());
-        synchronized (this) {
+        synchronized (PrintCounterUsingSynchronizedBlock.class) {
             for (int i = 0; i < 100; i++) {
                 cnt++;
             }
