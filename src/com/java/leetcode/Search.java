@@ -1,7 +1,7 @@
 package com.java.leetcode;
 
 public class Search {
-    public int search(int[] nums, int target) {
+    public static int search(int[] nums, int target) {
         int low = 0;
         int high = nums.length - 1;
         while (low <= high) {
@@ -19,6 +19,8 @@ public class Search {
     }
 
     public static void main(String[] args) {
-
+        int[] nums = {1,2,3,4,5,6,7,8,9,10};
+        int target = 9;
+        System.out.println(search(nums, target));
     }
 }
